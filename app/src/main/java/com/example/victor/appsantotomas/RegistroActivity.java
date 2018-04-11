@@ -4,19 +4,24 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class RegistroActivity extends AppCompatActivity {
     EditText et_registro_usuario,et_registro_email,et_registro_password,et_registro_cpassword;
     Button bt_registrar;
+    ImageView iv_registro_email,iv_registro_ccontrasena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        iv_registro_ccontrasena = findViewById(R.id.iv_registro_ccontrasena);
+        iv_registro_email = findViewById(R.id.iv_registro_email);
         et_registro_usuario = findViewById(R.id.et_registro_usuario);
         et_registro_email = findViewById(R.id.et_registro_email);
         et_registro_password = findViewById(R.id.et_registro_password);
@@ -28,6 +33,21 @@ public class RegistroActivity extends AppCompatActivity {
                 registrarUsuario(et_registro_usuario.getText().toString(),et_registro_email.getText().toString(),et_registro_password.getText().toString());
             }
         });
+
+        iv_registro_email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCustomToast("nombre@correo.com",iv_registro_email);
+            }
+        });
+
+        iv_registro_ccontrasena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCustomToast("Repetir contraseña debe coincidir con ek campo contraseña",iv_registro_ccontrasena);
+            }
+        });
+
 
     }
     private void registrarUsuario(String usuario,String email, String password){
@@ -48,5 +68,18 @@ public class RegistroActivity extends AppCompatActivity {
         }
 
     }
+
+    private void showCustomToast(String message,ImageView v){
+        /*
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        */
+        int x = v.getLeft();
+        int y = v.getTop();
+        Toast toast = Toast.makeText(this,message,Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP|Gravity.LEFT, x , y);
+        toast.show();
+    }
+
 
 }
