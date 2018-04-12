@@ -20,7 +20,6 @@ public class RegistroActivity extends AppCompatActivity {
     EditText et_registro_usuario, et_registro_email, et_registro_password, et_registro_cpassword;
     Button bt_registrar;
     ImageView iv_registro_email, iv_registro_ccontrasena;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,17 +44,13 @@ public class RegistroActivity extends AppCompatActivity {
                 showCustomToast("nombre@correo.com", iv_registro_email);
             }
         });
-
         iv_registro_ccontrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showCustomToast("Repetir contraseña debe coincidir con el campo contraseña", iv_registro_ccontrasena);
             }
         });
-
-
     }
-
     private void registrarUsuario(EditText usuario, EditText email, EditText contrasena, EditText ccontrasena) {
         boolean registrar = true;
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
@@ -66,7 +61,6 @@ public class RegistroActivity extends AppCompatActivity {
         boolean largoContraseña = true;
         boolean largoUsuario = true;
         boolean alfanumerico = true;
-
         if (!vacios){
                 registrar = false;
             }else{
@@ -76,7 +70,6 @@ public class RegistroActivity extends AppCompatActivity {
             alfanumerico = validarAlfanumerico(usuario);
             largoUsuario = validarLargoUsuario(usuario);
         }
-
         if (!alfanumerico)
             registrar = false;
 
@@ -89,16 +82,14 @@ public class RegistroActivity extends AppCompatActivity {
         if (!contra)
             registrar = false;
 
-        if (vacios == true && contra == true) {
+        if (vacios && contra) {
             correoV = validarCorreo(email.getText().toString());
         }
 
         if (!correoV) {
             registrar = false;
         }
-
-
-        if (registrar == true) {
+        if (registrar) {
             String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario.getText().toString() + "'";
             Cursor c = db.rawQuery(validar_usuario, null);
             if (c.moveToFirst()) {
@@ -118,9 +109,8 @@ public class RegistroActivity extends AppCompatActivity {
                             "Error al conectar a la base de datos", Toast.LENGTH_SHORT).show();
                 }
             }
+            c.close();
         }
-
-
     }
 
     private void showCustomToast(String message, ImageView v) {
@@ -157,7 +147,7 @@ public class RegistroActivity extends AppCompatActivity {
             errorVacio = errorVacio + "\nConfirmar contraseña.";
             todoIngresado = false;
         }
-        if (todoIngresado == false) {
+        if (!todoIngresado) {
 
             ventana.setMessage(errorVacio);
             ventana.show();
@@ -175,7 +165,7 @@ public class RegistroActivity extends AppCompatActivity {
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
         // Match the given input against this pattern
         Matcher matcher = pattern.matcher(correo);
-        if (matcher.matches() == false) {
+        if (!matcher.matches()) {
             builder.setMessage("El correo ingresado no es valido.");
             builder.setPositiveButton("Aceptar", null);
             builder.show();
@@ -194,12 +184,6 @@ public class RegistroActivity extends AppCompatActivity {
         return coincide;
     }
 
-    @Override
-    public void onBackPressed() {
-        RegistroActivity.this.finish();
-        super.onBackPressed();
-    }
-
     public boolean validarLargoContrasena(EditText contrasena) {
         boolean valido = true;
         String mensaje = "";
@@ -211,7 +195,7 @@ public class RegistroActivity extends AppCompatActivity {
             mensaje = "La contraseña debe contener maximo 20 caracteres";
             valido = false;
         }
-        if (valido == false) {
+        if (!valido) {
 
             Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
         }
@@ -239,7 +223,7 @@ public class RegistroActivity extends AppCompatActivity {
             mensaje = "El usuario debe contener maximo 20 caracteres";
             valido = false;
         }
-        if (valido == false) {
+        if (!valido) {
 
             Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
         }
