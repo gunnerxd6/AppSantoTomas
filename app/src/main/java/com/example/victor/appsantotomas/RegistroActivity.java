@@ -1,7 +1,10 @@
 package com.example.victor.appsantotomas;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +15,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegistroActivity extends AppCompatActivity {
-    EditText et_registro_usuario,et_registro_email,et_registro_password,et_registro_cpassword;
+    EditText et_registro_usuario, et_registro_email, et_registro_password, et_registro_cpassword;
     Button bt_registrar;
-    ImageView iv_registro_email,iv_registro_ccontrasena;
+    ImageView iv_registro_email, iv_registro_ccontrasena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,75 +37,149 @@ public class RegistroActivity extends AppCompatActivity {
         bt_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrarUsuario(et_registro_usuario.getText().toString(),et_registro_email.getText().toString(),et_registro_password.getText().toString());
+                registrarUsuario(et_registro_usuario, et_registro_email, et_registro_password, et_registro_cpassword);
             }
         });
 
         iv_registro_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCustomToast("nombre@correo.com",iv_registro_email);
+                showCustomToast("nombre@correo.com", iv_registro_email);
             }
         });
 
         iv_registro_ccontrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCustomToast("Repetir contraseña debe coincidir con el campo contraseña",iv_registro_ccontrasena);
+                showCustomToast("Repetir contraseña debe coincidir con el campo contraseña", iv_registro_ccontrasena);
             }
         });
 
 
     }
-    private void registrarUsuario(String usuario,String email, String password){
-        /*BaseHelper helper = new BaseHelper(this,"db_gastos",null,1);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try{
-            ContentValues c = new ContentValues();
-            c.put("USUARIO",usuario);
-            c.put("EMAIL",email);
-            c.put("PASSWORD", password);
-            db.insert("USUARIOS",null,c);
-            db.close();
-            Toast.makeText(getApplicationContext(),"Usuario registrado",Toast.LENGTH_SHORT).show();
 
-        }catch (Exception e){
-            Toast.makeText(getApplicationContext(),
-                    "Error al conectar a la base de datos",Toast.LENGTH_SHORT).show();
+    private void registrarUsuario(EditText usuario, EditText email, EditText contrasena, EditText ccontrasena) {
+        boolean registrar = true;
+        BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        boolean vacios = validarVacios(usuario, email, contrasena, ccontrasena);
+        boolean contra = compararPassword(contrasena, ccontrasena);
+        boolean correoV = true;
+
+        if (vacios == false)
+            registrar = false;
+
+        if (contra == false)
+            registrar = false;
+
+        if (vacios == true && contra == true) {
+            correoV = validarCorreo(email.getText().toString());
         }
-            */
-        validarRegistroUsuario(et_registro_usuario,et_registro_email,et_registro_password,et_registro_cpassword);
+
+        if (correoV == false) {
+            registrar = false;
+        }
+
+
+        if (registrar == true) {
+            String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario.getText().toString() + "' and PASSWORD='" + contrasena.getText().toString() + "'";
+            Cursor c = db.rawQuery(validar_usuario, null);
+            if (c.moveToFirst()) {
+                Toast.makeText(getApplicationContext(), "Usuario ya registrado", Toast.LENGTH_SHORT);
+            } else {
+                try {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("USUARIO", usuario.getText().toString());
+                    contentValues.put("EMAIL", email.getText().toString());
+                    contentValues.put("PASSWORD", contrasena.getText().toString());
+                    db.insert("USUARIOS", null, contentValues);
+                    db.close();
+                    Toast.makeText(getApplicationContext(), "Usuario registrado", Toast.LENGTH_SHORT).show();
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(),
+                            "Error al conectar a la base de datos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
 
     }
 
-    private void showCustomToast(String message,ImageView v){
+    private void showCustomToast(String message, ImageView v) {
         /*
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast_layout, (ViewGroup) findViewById(R.id.toast_root));
         */
         int x = v.getLeft();
         int y = v.getTop();
-        Toast toast = Toast.makeText(this,message,Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP|Gravity.LEFT, x , y);
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP | Gravity.LEFT, x, y);
         toast.show();
     }
-    private boolean validarRegistroUsuario(EditText usuario,EditText email, EditText contrasena, EditText ccontrasena){
-        boolean valido = true;
-        String errores = "Error: ";
-        //Validar nombre
-        if(usuario.getText().toString().equals("")){
-            errores = errores + " El campo usuario no debe estar vacio. ";
-            valido = false;
+
+    public boolean validarVacios(EditText usuario, EditText email, EditText contrasena, EditText ccontrasena) {
+        boolean todoIngresado = true;
+        String errorVacio = "Por favor, complete los siguientes campos:\n ";
+        AlertDialog.Builder ventana = new AlertDialog.Builder(RegistroActivity.this);
+        ventana.setTitle("Datos requeridos!");
+        ventana.setPositiveButton("Aceptar", null);
+        if (usuario.getText().toString().isEmpty()) {
+            errorVacio = errorVacio + "\nNombre de usuario.";
+            todoIngresado = false;
+        }
+        if (email.getText().toString().isEmpty()) {
+            errorVacio = errorVacio + "\nCorreo.";
+            todoIngresado = false;
+        }
+        if (contrasena.getText().toString().isEmpty()) {
+            errorVacio = errorVacio + "\nContraseña.";
+            todoIngresado = false;
+        }
+        if (ccontrasena.getText().toString().isEmpty()) {
+            errorVacio = errorVacio + "\nConfirmar contraseña.";
+            todoIngresado = false;
+        }
+        if (todoIngresado == false) {
+
+            ventana.setMessage(errorVacio);
+            ventana.show();
         }
 
-        String asd = "asd";
-        if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()==false) {
-            errores = errores + "Email no valido. ";
-            valido = false;
+        return todoIngresado;
+    }
+
+    public boolean validarCorreo(String correo) {
+        String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegistroActivity.this);
+        builder.setTitle("Error: ");
+        // Compiles the given regular expression into a pattern.
+        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+        // Match the given input against this pattern
+        Matcher matcher = pattern.matcher(correo);
+        if (matcher.matches() == false) {
+            builder.setMessage("El correo ingresado no es valido.");
+            builder.setPositiveButton("Aceptar", null);
+            builder.show();
         }
-        Log.i("Estado","Valido: "+valido);
+        return matcher.matches();
+    }
 
-        return valido;
+    public boolean compararPassword(EditText pass, EditText pass2) {
+        boolean coincide;
+        if (pass.getText().toString().equals(pass2.getText().toString())) {
+            coincide = true;
+        } else {
+            Toast.makeText(RegistroActivity.this, "Contraseñas no coinciden!", Toast.LENGTH_SHORT).show();
+            coincide = false;
+        }
+        return coincide;
+    }
 
+    @Override
+    public void onBackPressed() {
+        RegistroActivity.this.finish();
+        super.onBackPressed();
     }
 }
