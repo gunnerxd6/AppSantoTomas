@@ -1,13 +1,11 @@
 package com.example.victor.appsantotomas;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -63,29 +61,48 @@ public class RegistroActivity extends AppCompatActivity {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
         boolean vacios = validarVacios(usuario, email, contrasena, ccontrasena);
-        boolean contra = compararPassword(contrasena, ccontrasena);
+        boolean contra = true;
         boolean correoV = true;
+        boolean largoContraseña = true;
+        boolean largoUsuario = true;
+        boolean alfanumerico = true;
 
-        if (vacios == false)
+        if (!vacios){
+                registrar = false;
+            }else{
+            contra = compararPassword(contrasena, ccontrasena);
+            correoV = true;
+            largoContraseña = validarLargoContrasena(contrasena);
+            alfanumerico = validarAlfanumerico(usuario);
+            largoUsuario = validarLargoUsuario(usuario);
+        }
+
+        if (!alfanumerico)
             registrar = false;
 
-        if (contra == false)
+        if (!largoUsuario)
+            registrar = false;
+
+        if (!largoContraseña)
+            registrar = false;
+
+        if (!contra)
             registrar = false;
 
         if (vacios == true && contra == true) {
             correoV = validarCorreo(email.getText().toString());
         }
 
-        if (correoV == false) {
+        if (!correoV) {
             registrar = false;
         }
 
 
         if (registrar == true) {
-            String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario.getText().toString() + "' and PASSWORD='" + contrasena.getText().toString() + "'";
+            String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario.getText().toString() + "'";
             Cursor c = db.rawQuery(validar_usuario, null);
             if (c.moveToFirst()) {
-                Toast.makeText(getApplicationContext(), "Usuario ya registrado", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Usuario ya registrado", Toast.LENGTH_SHORT).show();
             } else {
                 try {
                     ContentValues contentValues = new ContentValues();
@@ -129,7 +146,7 @@ public class RegistroActivity extends AppCompatActivity {
             todoIngresado = false;
         }
         if (email.getText().toString().isEmpty()) {
-            errorVacio = errorVacio + "\nCorreo.";
+            errorVacio = errorVacio + "\nEmail.";
             todoIngresado = false;
         }
         if (contrasena.getText().toString().isEmpty()) {
@@ -181,5 +198,51 @@ public class RegistroActivity extends AppCompatActivity {
     public void onBackPressed() {
         RegistroActivity.this.finish();
         super.onBackPressed();
+    }
+
+    public boolean validarLargoContrasena(EditText contrasena) {
+        boolean valido = true;
+        String mensaje = "";
+        if (contrasena.getText().toString().length() < 6) {
+            mensaje = "La contraseña debe contener minimo 6 caracteres";
+            valido = false;
+        }
+        if (contrasena.getText().toString().length() > 20) {
+            mensaje = "La contraseña debe contener maximo 20 caracteres";
+            valido = false;
+        }
+        if (valido == false) {
+
+            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+        }
+        return valido;
+    }
+
+    public boolean validarAlfanumerico(EditText usuario) {
+        boolean valido = true;
+        if (!usuario.getText().toString().matches("[A-Za-z0-9]+")) {
+            valido = false;
+            Toast.makeText(getApplicationContext(), "El nombre de usuario debe ser alfanumerico", Toast.LENGTH_LONG).show();
+        }
+
+        return valido;
+    }
+
+    public boolean validarLargoUsuario(EditText usuario) {
+        boolean valido = true;
+        String mensaje = "";
+        if (usuario.getText().toString().length() < 6) {
+            mensaje = "El usuario debe contener minimo 6 caracteres";
+            valido = false;
+        }
+        if (usuario.getText().toString().length() > 20) {
+            mensaje = "El usuario debe contener maximo 20 caracteres";
+            valido = false;
+        }
+        if (valido == false) {
+
+            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+        }
+        return valido;
     }
 }

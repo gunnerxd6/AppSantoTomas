@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getReadableDatabase();
         boolean vacios = validarVacios(usuario, password);
-        if (vacios == true) {
+        if (vacios) {
             try {
                 String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario + "' and PASSWORD='" + password + "'";
                 Cursor c = db.rawQuery(validar_usuario, null);
@@ -48,9 +48,10 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Error al validar usuario", Toast.LENGTH_SHORT).show();
                 }
+                c.close();
 
             } catch (Exception e) {
-
+                Toast.makeText(getApplicationContext(),"Error al conectar base de datos",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -70,11 +71,14 @@ public class LoginActivity extends AppCompatActivity {
             todoIngresado = false;
         }
 
-        if (todoIngresado == false) {
+        if (!todoIngresado) {
 
             ventana.setMessage(errorVacio);
             ventana.show();
         }
         return todoIngresado;
     }
+
+
+
 }
