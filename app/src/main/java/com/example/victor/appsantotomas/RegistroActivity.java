@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -44,14 +45,14 @@ public class RegistroActivity extends AppCompatActivity {
         iv_registro_ccontrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCustomToast("Repetir contraseña debe coincidir con ek campo contraseña",iv_registro_ccontrasena);
+                showCustomToast("Repetir contraseña debe coincidir con el campo contraseña",iv_registro_ccontrasena);
             }
         });
 
 
     }
     private void registrarUsuario(String usuario,String email, String password){
-        BaseHelper helper = new BaseHelper(this,"db_gastos",null,1);
+        /*BaseHelper helper = new BaseHelper(this,"db_gastos",null,1);
         SQLiteDatabase db = helper.getWritableDatabase();
         try{
             ContentValues c = new ContentValues();
@@ -66,6 +67,8 @@ public class RegistroActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "Error al conectar a la base de datos",Toast.LENGTH_SHORT).show();
         }
+            */
+        validarRegistroUsuario(et_registro_usuario,et_registro_email,et_registro_password,et_registro_cpassword);
 
     }
 
@@ -80,6 +83,23 @@ public class RegistroActivity extends AppCompatActivity {
         toast.setGravity(Gravity.TOP|Gravity.LEFT, x , y);
         toast.show();
     }
+    private boolean validarRegistroUsuario(EditText usuario,EditText email, EditText contrasena, EditText ccontrasena){
+        boolean valido = true;
+        String errores = "Error: ";
+        //Validar nombre
+        if(usuario.getText().toString().equals("")){
+            errores = errores + " El campo usuario no debe estar vacio. ";
+            valido = false;
+        }
 
+        String asd = "asd";
+        if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()==false) {
+            errores = errores + "Email no valido. ";
+            valido = false;
+        }
+        Log.i("Estado","Valido: "+valido);
 
+        return valido;
+
+    }
 }
