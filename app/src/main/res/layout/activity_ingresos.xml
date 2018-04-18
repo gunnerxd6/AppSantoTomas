@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.victor.appsantotomas.IngresosActivity">
+    <EditText
+
+        android:id="@+id/et_descripcion"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/determine_los_ingresos_para_un_periodo_semanal_o_mensual"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+
+        android:layout_height="60dp"
+        android:layout_marginBottom="23dp"
+        android:layout_marginEnd="215dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="215dp"
+        android:layout_marginStart="72dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_ingresos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb_semanal"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/semanal" />
+
+        <RadioButton
+            android:id="@+id/rb_mensual"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mensual" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_ingresos"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginLeft="71dp"
+        android:layout_marginRight="91dp"
+        android:layout_marginStart="71dp"
+        android:ems="10"
+        android:hint="Ingresos"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/et_detalles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_detalles"
+        android:layout_width="255dp"
+        android:layout_height="82dp"
+        android:layout_marginBottom="200dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginLeft="71dp"
+        android:layout_marginRight="89dp"
+        android:layout_marginStart="71dp"
+        android:ems="10"
+        android:hint="Detalles"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_modi"
+        android:layout_width="111dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="126dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginRight="69dp"
+        android:layout_marginTop="44dp"
+        android:text="Modificar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_detalles" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="111dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="121dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginLeft="73dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="38dp"
+        android:text="Ingresar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_modi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_detalles" />
+</android.support.constraint.ConstraintLayout>

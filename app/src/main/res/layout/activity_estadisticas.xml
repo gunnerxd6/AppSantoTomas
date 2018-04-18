@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.victor.appsantotomas.EstadisticasActivity">
+    <TextView
+        android:id="@+id/tv_estadisticasgastos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="108dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginRight="108dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="42dp"
+        android:text="Estadisticas de gastos"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="399dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_estadisticasgastos"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RadioButton
+            android:id="@+id/rb_tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:text="Por tipo" />
+
+        <RadioButton
+            android:id="@+id/rb_periodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Por periodo"
+            android:textSize="15sp"
+            android:textColor="#000000"/>
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/iv_info"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/a8"
+        tools:layout_editor_absoluteY="127dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="140dp"
+        android:layout_marginStart="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="238dp" />
+
+
+</android.support.constraint.ConstraintLayout>
