@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Expense controller</string>
     <string name="text_tv_login">Inicio de sesion</string>
     <string name="text_bt_entrar">Entrar</string>
     <string name="hint_et_usuario">Usuario</string>
     <string name="hint_et_email">Email</string>
     <string name="hint_et_contrasena">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="modificar">Modificar</string>
+    <string name="detalles">Detalles</string>
+    <string name="ingresos">Ingresos</string>
+    <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
+    <string name="mensual">Mensual</string>
+    <string name="semanal">Semanal</string>
 </resources>

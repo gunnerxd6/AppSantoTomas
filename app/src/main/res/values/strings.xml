@@ -6,4 +6,7 @@
     <string name="hint_et_email">Email</string>
     <string name="hint_et_contrasena">Password</string>
     <string name="toast_email">Email format: example@example.com</string>
+    <string name="semanal">Semanal</string>
+    <string name="mensual">Mensual</string>
+    <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
 </resources>

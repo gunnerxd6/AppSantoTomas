@@ -18,7 +18,12 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".ModificarGastosActivity" />
+        <activity android:name=".AgregargastosActivity" />
+        <activity android:name=".ConfiguracionActivity" />
+        <activity android:name=".EstadisticasActivity" />
+        <activity android:name=".IngresosActivity"></activity>
     </application>
 
 </manifest>
