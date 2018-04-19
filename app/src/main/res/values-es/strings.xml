@@ -13,4 +13,12 @@
     <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
     <string name="mensual">Mensual</string>
     <string name="semanal">Semanal</string>
+    <string-array name="id_valores">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="idiomas">
+        <item>"Ingles"</item>
+        <item>"Español"</item>
+    </string-array>
 </resources>

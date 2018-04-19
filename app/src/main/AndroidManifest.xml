@@ -23,7 +23,10 @@
         <activity android:name=".AgregargastosActivity" />
         <activity android:name=".ConfiguracionActivity" />
         <activity android:name=".EstadisticasActivity" />
-        <activity android:name=".IngresosActivity"></activity>
+        <activity android:name=".IngresosActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
