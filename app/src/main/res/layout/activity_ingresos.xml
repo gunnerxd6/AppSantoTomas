@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context="com.example.victor.appsantotomas.IngresosActivity">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <EditText
 
         android:id="@+id/et_descripcion"
@@ -17,8 +23,7 @@
         android:layout_marginStart="54dp"
         android:layout_marginTop="37dp"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="@string/determine_los_ingresos_para_un_periodo_semanal_o_mensual"
+        android:hint="@string/determine_los_ingresos_para_un_periodo_semanal_o_mensual"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,21 +31,22 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
 
         android:layout_height="60dp"
-        android:layout_marginBottom="23dp"
-        android:layout_marginEnd="215dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="72dp"
-        android:layout_marginRight="215dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="72dp"
         app:layout_constraintBottom_toTopOf="@+id/et_ingresos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
             android:id="@+id/rb_semanal"
-            android:layout_width="121dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/semanal" />
@@ -56,12 +62,12 @@
     <EditText
         android:id="@+id/et_ingresos"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginLeft="71dp"
-        android:layout_marginRight="91dp"
-        android:layout_marginStart="71dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginStart="54dp"
         android:ems="10"
         android:hint="Ingresos"
         android:inputType="textPersonName"
@@ -74,10 +80,10 @@
         android:layout_width="255dp"
         android:layout_height="82dp"
         android:layout_marginBottom="200dp"
-        android:layout_marginEnd="89dp"
-        android:layout_marginLeft="71dp"
-        android:layout_marginRight="89dp"
-        android:layout_marginStart="71dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginStart="54dp"
         android:ems="10"
         android:hint="Detalles"
         android:inputType="textMultiLine"
@@ -113,4 +119,5 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_modi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_detalles" />
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.victor.appsantotomas.EstadisticasActivity">
+
     <TextView
         android:id="@+id/tv_estadisticasgastos"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="108dp"
         android:layout_marginLeft="99dp"
@@ -16,35 +17,31 @@
         android:layout_marginTop="42dp"
         android:text="Estadisticas de gastos"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:layout_width="0dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="399dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="38dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:id="@+id/radioGroup3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_info"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_estadisticasgastos"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="@+id/iv_info">
 
         <RadioButton
             android:id="@+id/rb_tipo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="15sp"
+            android:text="Por tipo"
             android:textColor="#000000"
-            android:text="Por tipo" />
+            android:textSize="15sp" />
 
         <RadioButton
             android:id="@+id/rb_periodo"
@@ -52,8 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Por periodo"
-            android:textSize="15sp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textSize="15sp" />
     </RadioGroup>
 
     <ImageView
@@ -62,21 +59,23 @@
         android:layout_height="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/a8"
-        tools:layout_editor_absoluteY="127dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_estadisticasgastos"
+        app:srcCompat="@drawable/a8" />
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="140dp"
-        android:layout_marginStart="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="238dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroup3"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup3"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
 
 
 </android.support.constraint.ConstraintLayout>
