@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context="com.example.victor.appsantotomas.AgregargastosActivity">
+    tools:context="com.example.victor.appsantotomas.AgregarGastosActivity">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,21 +27,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/s_tipogastos"
-        android:layout_width="0dp"
+        <Spinner
+            android:id="@+id/s_tipogastos"
+            android:layout_width="0dp"
 
-        android:layout_height="38dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginLeft="63dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginStart="63dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/et_montoagregargastos"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginLeft="63dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="100dp"
+            android:backgroundTint="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/et_montoagregargastos"
+            app:layout_constraintEnd_toStartOf="@+id/iv_agregargastos_añadir_tipo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_detallesagregargastos"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_detalles" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iv_agregargastos_añadir_tipo"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginEnd="80dp"

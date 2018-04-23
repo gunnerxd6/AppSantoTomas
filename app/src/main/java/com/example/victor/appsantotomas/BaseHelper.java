@@ -11,13 +11,17 @@ public class BaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(Utilidades.tabla_usuarios);
+        sqLiteDatabase.execSQL(Utilidades.TABLA_USUARIOS);
+        sqLiteDatabase.execSQL(Utilidades.TABLA_INGRESOS);
+        sqLiteDatabase.execSQL(Utilidades.TABLA_TIPO_EGRESO);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE USUARIOS");
+        sqLiteDatabase.execSQL("DROP TABLE INGRESOS");
+        sqLiteDatabase.execSQL("DROP TABLE TIPO_EGRESO");
         onCreate(sqLiteDatabase);
     }
 }

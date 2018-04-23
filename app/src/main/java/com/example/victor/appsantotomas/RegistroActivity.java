@@ -90,16 +90,16 @@ public class RegistroActivity extends AppCompatActivity {
             registrar = false;
         }
         if (registrar) {
-            String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario.getText().toString() + "'";
+            String validar_usuario = "SELECT NOMBRE_USUARIO,CLAVE_USUARIO FROM USUARIOS WHERE NOMBRE_USUARIO='" + usuario.getText().toString() + "'";
             Cursor c = db.rawQuery(validar_usuario, null);
             if (c.moveToFirst()) {
                 Toast.makeText(getApplicationContext(), "Usuario ya registrado", Toast.LENGTH_SHORT).show();
             } else {
                 try {
                     ContentValues contentValues = new ContentValues();
-                    contentValues.put("USUARIO", usuario.getText().toString());
-                    contentValues.put("EMAIL", email.getText().toString());
-                    contentValues.put("PASSWORD", contrasena.getText().toString());
+                    contentValues.put("NOMBRE_USUARIO", usuario.getText().toString());
+                    contentValues.put("EMAIL_USUARIO", email.getText().toString());
+                    contentValues.put("CLAVE_USUARIO", contrasena.getText().toString());
                     db.insert("USUARIOS", null, contentValues);
                     db.close();
                     Toast.makeText(getApplicationContext(), "Usuario registrado", Toast.LENGTH_SHORT).show();

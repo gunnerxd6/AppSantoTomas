@@ -40,10 +40,18 @@ public class LoginActivity extends AppCompatActivity {
         boolean vacios = validarVacios(usuario, password);
         if (vacios) {
             try {
-                String validar_usuario = "SELECT USUARIO,PASSWORD FROM USUARIOS WHERE USUARIO='" + usuario + "' and PASSWORD='" + password + "'";
+                String validar_usuario = "SELECT NOMBRE_USUARIO,CLAVE_USUARIO FROM USUARIOS WHERE NOMBRE_USUARIO='" + usuario + "' and CLAVE_USUARIO='" + password + "'";
                 Cursor c = db.rawQuery(validar_usuario, null);
                 if (c.moveToFirst()) {
+                    int id = 0;
+                    String obtener_id = "SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE_USUARIO= '"+usuario+"'";
+                    Cursor d = db.rawQuery(obtener_id,null);
+                    while (d.moveToNext()){
+                        id =d.getInt(d.getColumnIndex("ID_USUARIO"));
+                    }
                     Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+                    i.putExtra("ID_USUARIO_ACTUAL",id);
+                    Toast.makeText(getApplicationContext(),"Id: "+id,Toast.LENGTH_SHORT).show();
                     startActivity(i);
                 } else {
                     Toast.makeText(getApplicationContext(), "Error al validar usuario", Toast.LENGTH_SHORT).show();
@@ -54,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Error al conectar base de datos",Toast.LENGTH_SHORT).show();
             }
         }
+        db.close();
     }
 
     public boolean validarVacios(String usuario, String contrasena) {
