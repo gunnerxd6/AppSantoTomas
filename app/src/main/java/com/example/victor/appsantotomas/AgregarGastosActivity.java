@@ -17,18 +17,28 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AgregarGastosActivity extends AppCompatActivity {
     int id;
-
+    EditText et_monto_gasto,et_detalle_gasto;
+    Button bt_añadir;
     ImageView iv_agregargastos_anadir_tipo;
     Spinner s_tipogastos;
+    String fecha;
+    SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fecha = sdf.format(Calendar.getInstance().getTime());
         setContentView(R.layout.activity_agregargastos);
+        et_monto_gasto = findViewById(R.id.et_montoagregargastos);
+        et_detalle_gasto = findViewById(R.id.et_detallesagregargastos);
+        bt_añadir = findViewById(R.id.btn_anadir);
         s_tipogastos = findViewById(R.id.s_tipogastos);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         consultarListaDeTiposDeGasto(id);
@@ -70,6 +80,13 @@ public class AgregarGastosActivity extends AppCompatActivity {
             }
         });
 
+        bt_añadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registrarGasto(et_monto_gasto,et_detalle_gasto,s_tipogastos,id,fecha);
+            }
+        });
+
 
     }
     private boolean agregarTipoEgreso(EditText tipoEgreso, int id_usuario){
@@ -107,6 +124,34 @@ public class AgregarGastosActivity extends AppCompatActivity {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,tipos_gasto);
         s_tipogastos.setAdapter(adapter);
+    }
+
+    private void registrarGasto(EditText monto,EditText detalle, Spinner tipo, int id, String fecha){
+        BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String tipo_seleccionado = tipo.getSelectedItem().toString();
+        int idTipo =0;
+        String sql_obtener_id_gasto = "SELECT ID_TIPO_EGRESO FROM TIPO_EGRESO WHERE DETALLE_TIPO_EGRESO = '"+tipo_seleccionado+"'";
+        Cursor c = db.rawQuery(sql_obtener_id_gasto,null);
+        if (c.moveToFirst()){
+            idTipo = c.getInt(c.getColumnIndex("ID_TIPO_EGRESO"));
+            try{
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("MONTO_EGRESO", monto.getText().toString());
+                contentValues.put("FECHA_EGRESO", String.valueOf(fecha));
+                contentValues.put("DETALLE_EGRESO", detalle.getText().toString());
+                contentValues.put("FK_ID_USUARIO", id);
+                contentValues.put("FK_TIPO_EGRESO", idTipo);
+                db.insert("EGRESOS", null, contentValues);
+
+                Toast.makeText(getApplicationContext(), R.string.gasto_registrado, Toast.LENGTH_SHORT).show();
+            }catch (Exception e){
+
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),R.string.error_al_registrar_tipo,Toast.LENGTH_SHORT);
+        }
+        db.close();
     }
 
 }

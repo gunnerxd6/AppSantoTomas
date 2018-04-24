@@ -28,4 +28,18 @@ public class Utilidades {
             "  CONSTRAINT FK_ID_USUARIO\n" +
             "  FOREIGN KEY (FK_ID_USUARIO)\n"+
             "  REFERENCES USUARIO (ID_USUARIO))";
+    public static final String TABLA_EGRESOS = "CREATE TABLE EGRESOS (\n" +
+            "  ID_EGRESO INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+            "  FK_ID_USUARIO INTEGER NOT NULL,\n" +
+            "  DETALLE_EGRESO TEXT NOT NULL,\n"+
+            "  MONTO_EGRESO INTEGER NOT NULL,\n"+
+            "  FECHA_EGRESO DATE NOT NULL,\n"+
+            "  FK_TIPO_EGRESO INTEGER NOT NULL,\n"+
+            "  CONSTRAINT FK_ID_USUARIO\n" +
+            "  FOREIGN KEY (FK_ID_USUARIO)\n"+
+            "  REFERENCES USUARIO (ID_USUARIO)"+
+            "  CONSTRAINT FK_TIPO_EGRESO\n" +
+            "  FOREIGN KEY (FK_TIPO_EGRESO)\n"+
+            "  REFERENCES TIPO_EGRESO (ID_TIPO_EGRESO))";
+
 }

@@ -6,104 +6,139 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context="com.example.victor.appsantotomas.AgregarGastosActivity">
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/tv_agregargastos"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginLeft="135dp"
-        android:layout_marginRight="136dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="36dp"
-        android:text="Agregar Gastos"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/s_tipogastos"
+        <TextView
+            android:id="@+id/tv_agregargastos"
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginLeft="63dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginStart="63dp"
-            android:layout_marginTop="100dp"
-            android:backgroundTint="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/et_montoagregargastos"
-            app:layout_constraintEnd_toStartOf="@+id/iv_agregargastos_añadir_tipo"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/agregar_gastos"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_detallesagregargastos"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginRight="81dp"
-        android:layout_marginStart="61dp"
-        android:ems="10"
-        android:hint="Detalles"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Spinner
+            android:id="@+id/s_tipogastos"
+            android:layout_width="wrap_content"
 
-    <EditText
-        android:id="@+id/et_montoagregargastos"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginRight="81dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="230dp"
-        android:ems="10"
-        android:hint="Monto"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/et_detallesagregargastos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+        <EditText
+            android:id="@+id/et_detallesagregargastos"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="200dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginStart="32dp"
+            android:ems="10"
+            android:hint="@string/detalles"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/et_montoagregargastos"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="36dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/cantidad"
+            android:inputType="number"
+            app:layout_constraintBottom_toTopOf="@+id/et_detallesagregargastos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
         <Button
             android:id="@+id/btn_anadir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="124dp"
-            android:layout_marginEnd="240dp"
-            android:layout_marginLeft="63dp"
-            android:layout_marginRight="240dp"
-            android:layout_marginStart="63dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+
             android:layout_marginTop="32dp"
-            android:text="Añadir"
+            android:text="@string/añadir"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_detalles" />
 
-    <ImageView
-        android:id="@+id/iv_agregargastos_añadir_tipo"
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/iconoagregarnegro" />
+        <ImageView
+            android:id="@+id/iv_agregargastos_añadir_tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toEndOf="@+id/s_tipogastos"
+            app:layout_constraintTop_toTopOf="@+id/guideline7"
+            app:srcCompat="@drawable/iconoagregarnegro" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="61dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="395dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="203dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="108dp" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

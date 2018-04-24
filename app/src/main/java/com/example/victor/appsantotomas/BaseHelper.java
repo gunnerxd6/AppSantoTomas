@@ -14,6 +14,7 @@ public class BaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(Utilidades.TABLA_USUARIOS);
         sqLiteDatabase.execSQL(Utilidades.TABLA_INGRESOS);
         sqLiteDatabase.execSQL(Utilidades.TABLA_TIPO_EGRESO);
+        sqLiteDatabase.execSQL(Utilidades.TABLA_EGRESOS);
 
     }
 
@@ -22,6 +23,7 @@ public class BaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE USUARIOS");
         sqLiteDatabase.execSQL("DROP TABLE INGRESOS");
         sqLiteDatabase.execSQL("DROP TABLE TIPO_EGRESO");
+        sqLiteDatabase.execSQL("DROP TABLE EGRESOS");
         onCreate(sqLiteDatabase);
     }
 }

@@ -8,6 +8,24 @@
     <string name="toast_email">Email format: example@example.com</string>
     <string name="semanal">Semanal</string>
     <string name="mensual">Mensual</string>
+    <string name="login_ya_tiene">"If you already have an account"</string>
+    <string name="login_no_tiene">"If you do not have an account yet"</string>
+    <string name="entrar">Login</string>
+    <string name="registrar">Singn up</string>
+    <string name="agregar_gastos">Add expenses</string>
+    <string name="agregar_ingresos">Earnings</string>
+    <string name="modificar_gastos">Modify expenses</string>
+    <string name="estadisticas">Statistics</string>
+    <string name="salir">Logout</string>
+    <string name="cantidad">Amount</string>
+    <string name="detalles">Details</string>
+    <string name="añadir">Add</string>
+    <string name="estadistica_gastos">Expenditure statistics</string>
+    <string name="por_tipo">By type</string>
+    <string name="por_periodo">By period</string>
+    <string name="error_al_registrar_tipo">Error to register type</string>
+    <string name="gasto_registrado">Expense registered</string>
+
     <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
     <string-array name="idiomas">
         <item>"English"</item>

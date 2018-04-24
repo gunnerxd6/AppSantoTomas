@@ -13,6 +13,23 @@
     <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
     <string name="mensual">Mensual</string>
     <string name="semanal">Semanal</string>
+    <string name="login_ya_tiene">"Si ya tienes una cuenta"</string>
+    <string name="login_no_tiene">"Si aun no"</string>
+    <string name="entrar">Entrar</string>
+    <string name="registrar">Registrarte</string>
+    <string name="agregar_gastos">Agregar gastos</string>
+    <string name="agregar_ingresos">Ingresos</string>
+    <string name="modificar_gastos">Modificar gastos</string>
+    <string name="estadisticas">Estadisticas</string>
+    <string name="salir">Salir</string>
+    <string name="cantidad">Monto</string>
+    <string name="añadir">Añadir</string>
+    <string name="estadistica_gastos">Estadistica de gastos</string>
+    <string name="por_tipo">Por tipoe</string>
+    <string name="por_periodo">Por periodo</string>
+    <string name="error_al_registrar_tipo">Error to register type</string>
+    <string name="gasto_registrado">Gasto registrado</string>
+
     <string-array name="id_valores">
         <item>1</item>
         <item>0</item>

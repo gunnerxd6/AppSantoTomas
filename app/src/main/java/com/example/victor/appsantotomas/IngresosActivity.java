@@ -9,21 +9,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class IngresosActivity extends AppCompatActivity {
-    Date fecha;
+    String fecha;
     EditText et_ingresos,et_detalle;
     Button bt_registrar_ingreso;
     int id;
-
+    SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresos);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
-        fecha = Calendar.getInstance().getTime();
+        fecha = sdf.format(Calendar.getInstance().getTime());
         et_ingresos = findViewById(R.id.et_ingresos);
         et_detalle = findViewById(R.id.et_detalles);
         bt_registrar_ingreso = findViewById(R.id.bt_ingresos_registrar);
@@ -35,7 +36,7 @@ public class IngresosActivity extends AppCompatActivity {
         });
     }
 
-    private void registrarIngreso(EditText et_ingresos, EditText et_detalle, Date fecha,int id_usuario){
+    private void registrarIngreso(EditText et_ingresos, EditText et_detalle, String fecha,int id_usuario){
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
