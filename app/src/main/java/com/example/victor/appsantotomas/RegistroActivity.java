@@ -114,10 +114,6 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void showCustomToast(String message, ImageView v) {
-        /*
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-        */
         int x = v.getLeft();
         int y = v.getTop();
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);

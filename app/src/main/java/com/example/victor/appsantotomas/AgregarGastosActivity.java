@@ -111,7 +111,7 @@ public class AgregarGastosActivity extends AppCompatActivity {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getReadableDatabase();
         ArrayList<String> tipos_gasto = new ArrayList<String>();
-        tipos_gasto.add("Seleccione...");
+        tipos_gasto.add(getResources().getString(R.string.seleccione));
         for(int i = 0; i<tipos_gasto.size();i++){
             Log.e("Item","Item: "+tipos_gasto.get(i));
         }

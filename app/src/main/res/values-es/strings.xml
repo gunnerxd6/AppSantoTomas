@@ -29,7 +29,13 @@
     <string name="por_periodo">Por periodo</string>
     <string name="error_al_registrar_tipo">Error to register type</string>
     <string name="gasto_registrado">Gasto registrado</string>
-
+    <string name="detalle">Detalles</string>
+    <string name="monto">Monto</string>
+    <string name="tipo">Tipe</string>
+    <string name="guardar">Guardar</string>
+    <string name="seleccione">Seleccione...</string>
+    <string name="seleccionar_tipo">Debes seleccionar un tipo</string>
+    <string name="completar_campos">Debes completar todos los campos</string>
     <string-array name="id_valores">
         <item>1</item>
         <item>0</item>

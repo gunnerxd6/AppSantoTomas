@@ -25,6 +25,13 @@
     <string name="por_periodo">By period</string>
     <string name="error_al_registrar_tipo">Error to register type</string>
     <string name="gasto_registrado">Expense registered</string>
+    <string name="detalle">Details</string>
+    <string name="monto">Amount</string>
+    <string name="tipo">Type</string>
+    <string name="guardar">Save</string>
+    <string name="seleccione">Select...</string>
+    <string name="seleccionar_tipo">You must select a type</string>
+    <string name="completar_campos">You must complete all the fields</string>
 
     <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
     <string-array name="idiomas">
