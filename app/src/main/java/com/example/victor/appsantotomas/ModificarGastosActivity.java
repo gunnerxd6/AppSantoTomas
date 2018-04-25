@@ -1,8 +1,14 @@
 package com.example.victor.appsantotomas;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,23 +16,32 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ModificarGastosActivity extends AppCompatActivity {
     ListView lv_gastos;
     ArrayList<Gastos> gastos;
     ArrayList<String> informacion;
+    TextView tv_datepicker;
+    SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
+    DatePickerDialog.OnDateSetListener onDateSetListener;
     int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_gastos);
         lv_gastos = findViewById(R.id.lv_gastos);
+        tv_datepicker = findViewById(R.id.tv_datepicker);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         consultarGastos(id,lv_gastos);
         lv_gastos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -39,6 +54,7 @@ public class ModificarGastosActivity extends AppCompatActivity {
                 dialog.setTitle("");
                 final int id_egreso = gastos.get(i).getId_egreso();
                 Button bt_dialog_modificar = dialog.findViewById(R.id.bt_dialog_modificar);
+                Button bt_dialog_eliminar = dialog.findViewById(R.id.bt_dialog_eliminar);
                 final EditText et_dialog_detalle = dialog.findViewById(R.id.et_dialog_detalle);
                 final EditText et_dialog_monto = dialog.findViewById(R.id.et_dialog_monto);
                 final Spinner s_dialog_tipo = dialog.findViewById(R.id.s_dialog_tipo);
@@ -72,9 +88,61 @@ public class ModificarGastosActivity extends AppCompatActivity {
                         }
                     }
                 });
+                bt_dialog_eliminar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(ModificarGastosActivity.this);
+                        builder.setTitle("¿Eliminar?");
+                        builder.setMessage("Eliminar registro del gasto");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                builder.show();
+                                eliminarGasto(id_egreso);
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.setNegativeButton("Cancelar", null);
+                        builder.show();
+                    }
+
+
+                });
+
                 dialog.show();
             }
         });
+
+        tv_datepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int año = cal.get(Calendar.YEAR);
+                int mes = cal.get(Calendar.MONTH);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(ModificarGastosActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        onDateSetListener,año,mes,dia);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int año, int mes, int dia) {
+                mes = mes+1;
+                if(mes<10){
+                    String mes_fix = "0"+mes;
+                    mes = Integer.valueOf(mes_fix);
+                }
+                String fecha =año+"-"+mes+"-"+dia;
+                Log.d("Fecha",fecha);
+                consultarGastosPorFecha(id,lv_gastos,fecha);
+            }
+        };
+
     }
 
     private void consultarGastos(int id,ListView lv_gastos){
@@ -149,5 +217,49 @@ public class ModificarGastosActivity extends AppCompatActivity {
         }
         return detalle;
     }
+
+    private void eliminarGasto(int id_gasto){
+        try {
+            BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
+            SQLiteDatabase db = helper.getWritableDatabase();
+            String sql_eliminar = "DELETE FROM EGRESOS WHERE ID_EGRESO=" + id_gasto;
+            db.execSQL(sql_eliminar);
+            consultarGastos(id, lv_gastos);
+        }catch (Exception e){
+
+        }
+    }
+
+    private void consultarGastosPorFecha(int id,ListView lv_gastos,String fecha){
+        ArrayList<Gastos>gastos2 = new ArrayList<>();
+        Gastos gastos1 = null;
+        BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String sql_obtener_gastos = "SELECT * FROM EGRESOS WHERE FK_ID_USUARIO="+id+" AND FECHA_EGRESO ='"+fecha+"'";
+        Cursor c = db.rawQuery(sql_obtener_gastos,null);
+        while (c.moveToNext()){
+            gastos1 = new Gastos();
+            gastos1.setId_egreso(c.getInt(0));
+            gastos1.setDetalle(c.getString(2));
+            gastos1.setMonto(c.getInt(3));
+            gastos1.setFecha(c.getString(4));
+            gastos1.setId_usuario(c.getInt(1));
+            gastos1.setId_tipo_gasto(c.getInt(5));
+            gastos2.add(gastos1);
+        }
+        db.close();
+        ArrayList<String>informacion1 = new ArrayList<>();
+        for (int i = 0; i<gastos2.size();i++){
+            String detalle = obtenerDetalleGasto(gastos2.get(i).getId_tipo_gasto());
+            String cadena = "Detalle: "+gastos2.get(i).getDetalle()+"\nFecha: "+gastos2.get(i).getFecha()+"\nMonto: "+gastos2.get(i).getMonto()+
+                    "\nTipo: "+detalle;
+            informacion1.add(cadena);
+        }
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,informacion1);
+        lv_gastos.setAdapter(adapter);
+
+    }
+
+
 
 }
