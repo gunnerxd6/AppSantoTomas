@@ -2,10 +2,20 @@ package com.example.victor.appsantotomas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.database.ContentObserver;
+import android.os.Build;
+import android.os.Handler;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +34,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         //Obtener id de usuario logeado
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
-        //Toast.makeText(getApplicationContext(),"Id: "+id,Toast.LENGTH_SHORT).show();
         //Floatingactionbutton
         fab_ingresos=findViewById(R.id.fab_ingresos);
         fab_agregargastos=findViewById(R.id.fab_agregargastos);
@@ -108,7 +117,7 @@ public class MenuActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent o = new Intent(MenuActivity.this,MainActivity.class);
+                Intent o = new Intent(MenuActivity.this, MainActivity.class);
                 startActivity(o);
                 id = 0;
                 MenuActivity.this.finish();
@@ -117,6 +126,6 @@ public class MenuActivity extends AppCompatActivity {
         builder.setNegativeButton("Cancelar", null);
         builder.show();
 
-       // super.onBackPressed();
+        // super.onBackPressed();
     }
 }

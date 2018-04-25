@@ -61,7 +61,7 @@ public class ModificarGastosActivity extends AppCompatActivity {
 
                             try {
                                 String sql_modificar_gasto = "UPDATE EGRESOS SET DETALLE_EGRESO = '" + et_dialog_detalle.getText().toString() + "', MONTO_EGRESO =" +
-                                        " '" + et_dialog_monto.getText().toString() + " WHERE ID_EGRESO =" + id_egreso;
+                                        "" + et_dialog_monto.getText().toString() + ", FK_TIPO_EGRESO ="+obtenerIdGasto(s_dialog_tipo)+" WHERE ID_EGRESO =" + id_egreso;
                                 db.execSQL(sql_modificar_gasto);
                                 consultarGastos(id, lv_gastos);
                                 Toast.makeText(getApplicationContext(), "Gasto modificado", Toast.LENGTH_SHORT).show();
@@ -73,10 +73,10 @@ public class ModificarGastosActivity extends AppCompatActivity {
                     }
                 });
                 dialog.show();
-
             }
         });
     }
+
     private void consultarGastos(int id,ListView lv_gastos){
         gastos = new ArrayList<>();
         Gastos gastos1 = null;
@@ -97,7 +97,9 @@ public class ModificarGastosActivity extends AppCompatActivity {
         db.close();
         informacion = new ArrayList<>();
         for (int i = 0; i<gastos.size();i++){
-            String cadena = "Detalle: "+gastos.get(i).getDetalle()+"\nFecha: "+gastos.get(i).getFecha()+"\nMonto: "+gastos.get(i).getMonto();
+            String detalle = obtenerDetalleGasto(gastos.get(i).getId_tipo_gasto());
+            String cadena = "Detalle: "+gastos.get(i).getDetalle()+"\nFecha: "+gastos.get(i).getFecha()+"\nMonto: "+gastos.get(i).getMonto()+
+                    "\nTipo: "+detalle;
             informacion.add(cadena);
         }
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,informacion);
@@ -124,6 +126,28 @@ public class ModificarGastosActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,tipos_gasto);
         s_tipogastos.setAdapter(adapter);
     }
-
+    private int obtenerIdGasto(Spinner s){
+        int id_gasto = 0;
+        BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String sql_obtener_id_gasto = "SELECT ID_TIPO_EGRESO FROM TIPO_EGRESO WHERE DETALLE_TIPO_EGRESO = '"
+                +s.getSelectedItem().toString()+"'";
+        Cursor c = db.rawQuery(sql_obtener_id_gasto,null);
+        if (c.moveToFirst()){
+            id_gasto = c.getInt(c.getColumnIndex("ID_TIPO_EGRESO"));
+        }
+        return id_gasto;
+    }
+    private String obtenerDetalleGasto(int id_gasto){
+        String detalle = "";
+        BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String sql_obtener_id_gasto = "SELECT DETALLE_TIPO_EGRESO FROM TIPO_EGRESO WHERE ID_TIPO_EGRESO = "+id_gasto;
+        Cursor c = db.rawQuery(sql_obtener_id_gasto,null);
+        if (c.moveToFirst()){
+            detalle = c.getString(c.getColumnIndex("DETALLE_TIPO_EGRESO"));
+        }
+        return detalle;
+    }
 
 }
