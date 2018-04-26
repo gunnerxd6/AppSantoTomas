@@ -8,9 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,14 +18,15 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".MenuActivity"
-            android:configChanges="orientation|screenSize"
-            />
+        <activity
+            android:name=".MenuActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".ModificarGastosActivity" />
         <activity android:name=".AgregarGastosActivity" />
         <activity android:name=".ConfiguracionActivity" />
         <activity android:name=".EstadisticasActivity" />
         <activity android:name=".IngresosActivity" />
+        <activity android:name=".CircularActivity"/>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@
     <EditText
         android:id="@+id/et_registro_usuario"
         android:layout_width="0dp"
+        android:drawableLeft="@drawable/user"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
         android:layout_marginStart="64dp"
@@ -39,42 +40,40 @@
         android:id="@+id/et_registro_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="64dp"
+
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/iv_registro_email"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_registro_usuario"
+        app:layout_constraintStart_toStartOf="@+id/et_registro_usuario"
         app:layout_constraintTop_toBottomOf="@+id/et_registro_usuario" />
 
     <EditText
         android:id="@+id/et_registro_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/password"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_registro_email"
+        app:layout_constraintStart_toStartOf="@+id/et_registro_email"
         app:layout_constraintTop_toBottomOf="@+id/et_registro_email" />
 
     <EditText
         android:id="@+id/et_registro_cpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/password"
         android:ems="10"
         android:hint="Confirmar contraseña"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/iv_registro_ccontrasena"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_registro_password"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_registro_password"
         app:layout_constraintTop_toBottomOf="@+id/et_registro_password" />
 
     <Button
@@ -94,9 +93,13 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginBottom="8dp"
+
         android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/et_registro_email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_registro_email"
         app:srcCompat="@drawable/a8" />
 
     <ImageView
@@ -104,9 +107,13 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginBottom="8dp"
+
         android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/et_registro_cpassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_registro_cpassword"
         app:srcCompat="@drawable/a8" />
 
 </android.support.constraint.ConstraintLayout>

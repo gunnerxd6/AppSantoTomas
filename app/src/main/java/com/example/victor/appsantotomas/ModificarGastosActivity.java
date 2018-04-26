@@ -118,29 +118,30 @@ public class ModificarGastosActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
                 int año = cal.get(Calendar.YEAR);
-                int mes = cal.get(Calendar.MONTH);
-                int dia = cal.get(Calendar.DAY_OF_MONTH);
+        int mes = cal.get(Calendar.MONTH);
+        int dia = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(ModificarGastosActivity.this,
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        onDateSetListener,año,mes,dia);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
+        DatePickerDialog dialog = new DatePickerDialog(ModificarGastosActivity.this,
+                android.R.style.Theme_Holo_Dialog_MinWidth,
+                onDateSetListener,año,mes,dia);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+});
 
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int año, int mes, int dia) {
-                mes = mes+1;
-                if(mes<10){
-                    String mes_fix = "0"+mes;
-                    mes = Integer.valueOf(mes_fix);
-                }
-                String fecha =año+"-"+mes+"-"+dia;
-                Log.d("Fecha",fecha);
-                consultarGastosPorFecha(id,lv_gastos,fecha);
-            }
+@Override
+public void onDateSet(DatePicker datePicker, int año, int mes, int dia) {
+    mes = mes + 1;
+    String mes_fix = "";
+    if (mes < 10) {
+        mes_fix = "0" + mes;
+        mes = Integer.valueOf(mes_fix);
+    }
+    String fecha = año + "-" + mes_fix + "-" + dia;
+    Log.d("Fecha", fecha);
+        consultarGastosPorFecha(id,lv_gastos,fecha);
+        }
         };
 
     }
