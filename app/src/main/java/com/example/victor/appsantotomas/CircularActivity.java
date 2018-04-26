@@ -162,6 +162,7 @@ public class CircularActivity extends AppCompatActivity {
 
         //calcular porcentajes de cada tipo
         if (suma == 0){
+            pieChart.clear();
             Toast.makeText(getApplicationContext(),"No hay registros para la fecha seleccionada",Toast.LENGTH_SHORT).show();
         }else {
             for(int i = 0;i < montos.size();i++){
