@@ -44,14 +44,13 @@ public class LoginActivity extends AppCompatActivity {
                 Cursor c = db.rawQuery(validar_usuario, null);
                 if (c.moveToFirst()) {
                     int id = 0;
-                    String obtener_id = "SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE_USUARIO= '"+usuario+"'";
-                    Cursor d = db.rawQuery(obtener_id,null);
-                    while (d.moveToNext()){
-                        id =d.getInt(d.getColumnIndex("ID_USUARIO"));
+                    String obtener_id = "SELECT ID_USUARIO FROM USUARIOS WHERE NOMBRE_USUARIO= '" + usuario + "'";
+                    Cursor d = db.rawQuery(obtener_id, null);
+                    while (d.moveToNext()) {
+                        id = d.getInt(d.getColumnIndex("ID_USUARIO"));
                     }
                     Intent i = new Intent(LoginActivity.this, MenuActivity.class);
-                    i.putExtra("ID_USUARIO_ACTUAL",id);
-                    Toast.makeText(getApplicationContext(),"Id: "+id,Toast.LENGTH_SHORT).show();
+                    i.putExtra("ID_USUARIO_ACTUAL", id);
                     startActivity(i);
                 } else {
                     Toast.makeText(getApplicationContext(), "Error al validar usuario", Toast.LENGTH_SHORT).show();
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 c.close();
 
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(),"Error al conectar base de datos",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error al conectar base de datos", Toast.LENGTH_SHORT).show();
             }
         }
         db.close();

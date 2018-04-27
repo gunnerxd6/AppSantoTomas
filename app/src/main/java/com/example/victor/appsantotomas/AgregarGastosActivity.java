@@ -25,12 +25,13 @@ import java.util.List;
 
 public class AgregarGastosActivity extends AppCompatActivity {
     int id;
-    EditText et_monto_gasto,et_detalle_gasto;
+    EditText et_monto_gasto, et_detalle_gasto;
     Button bt_añadir;
     ImageView iv_agregargastos_anadir_tipo;
     Spinner s_tipogastos;
     String fecha;
-    SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class AgregarGastosActivity extends AppCompatActivity {
         s_tipogastos = findViewById(R.id.s_tipogastos);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         consultarListaDeTiposDeGasto(id);
-        Toast.makeText(getApplicationContext(),"Id: "+id,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Id: " + id, Toast.LENGTH_SHORT).show();
         iv_agregargastos_anadir_tipo = findViewById(R.id.iv_agregargastos_añadir_tipo);
         iv_agregargastos_anadir_tipo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +57,16 @@ public class AgregarGastosActivity extends AppCompatActivity {
                 bt_agregar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(et_tipo.getText().toString().equals("")){
-                            Toast.makeText(getApplicationContext(),"El tipo no puede ser vacio",Toast.LENGTH_SHORT).show();
-                        }else{
-                            if(agregarTipoEgreso(et_tipo,id)){
-                                Toast.makeText(getApplicationContext(),"Tipo de gasto registrado",Toast.LENGTH_SHORT).show();
+                        if (et_tipo.getText().toString().equals("")) {
+                            Toast.makeText(getApplicationContext(), "El tipo no puede ser vacio", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (agregarTipoEgreso(et_tipo, id)) {
+                                Toast.makeText(getApplicationContext(), "Tipo de gasto registrado", Toast.LENGTH_SHORT).show();
                                 et_tipo.setText("");
                                 dialog.dismiss();
                                 consultarListaDeTiposDeGasto(id);
-                            }else {
-                                Toast.makeText(getApplicationContext(),"Error al ingresar tipo de gasto",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Error al ingresar tipo de gasto", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -83,13 +84,23 @@ public class AgregarGastosActivity extends AppCompatActivity {
         bt_añadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrarGasto(et_monto_gasto,et_detalle_gasto,s_tipogastos,id,fecha);
+                if (s_tipogastos.getSelectedItem().toString().equals(getResources().getString(R.string.seleccione))) {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.seleccionar_tipo), Toast.LENGTH_SHORT).show();
+                } else {
+                    if (et_monto_gasto.getText().toString().equals("")) {
+                        Toast.makeText(getApplicationContext(), "Debe ingresar un monto", Toast.LENGTH_SHORT);
+
+                    }else {
+                        registrarGasto(et_monto_gasto, et_detalle_gasto, s_tipogastos, id, fecha);
+                    }
+                }
+
             }
         });
 
-
     }
-    private boolean agregarTipoEgreso(EditText tipoEgreso, int id_usuario){
+
+    private boolean agregarTipoEgreso(EditText tipoEgreso, int id_usuario) {
         Boolean ingresado;
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -99,43 +110,43 @@ public class AgregarGastosActivity extends AppCompatActivity {
             contentValues.put("FK_ID_USUARIO", id_usuario);
             db.insert("TIPO_EGRESO", null, contentValues);
             ingresado = true;
-        }catch (Exception e){
-            Log.e("ERROR INGRESO",e.getMessage().toString());
+        } catch (Exception e) {
+            Log.e("ERROR INGRESO", e.getMessage().toString());
             ingresado = false;
         }
         db.close();
         return ingresado;
     }
 
-    private void consultarListaDeTiposDeGasto(int id){
+    private void consultarListaDeTiposDeGasto(int id) {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getReadableDatabase();
         ArrayList<String> tipos_gasto = new ArrayList<String>();
         tipos_gasto.add(getResources().getString(R.string.seleccione));
-        for(int i = 0; i<tipos_gasto.size();i++){
-            Log.e("Item","Item: "+tipos_gasto.get(i));
+        for (int i = 0; i < tipos_gasto.size(); i++) {
+            Log.e("Item", "Item: " + tipos_gasto.get(i));
         }
 
-        String sql = "SELECT DETALLE_TIPO_EGRESO FROM TIPO_EGRESO WHERE FK_ID_USUARIO ="+id;
-        Cursor c = db.rawQuery(sql,null);
-        while(c.moveToNext()){
-           tipos_gasto.add(c.getString(c.getColumnIndex("DETALLE_TIPO_EGRESO")));
-           Log.e("Valor tipo",""+c.getString(c.getColumnIndex("DETALLE_TIPO_EGRESO")));
+        String sql = "SELECT DETALLE_TIPO_EGRESO FROM TIPO_EGRESO WHERE FK_ID_USUARIO =" + id;
+        Cursor c = db.rawQuery(sql, null);
+        while (c.moveToNext()) {
+            tipos_gasto.add(c.getString(c.getColumnIndex("DETALLE_TIPO_EGRESO")));
+            Log.e("Valor tipo", "" + c.getString(c.getColumnIndex("DETALLE_TIPO_EGRESO")));
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,tipos_gasto);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos_gasto);
         s_tipogastos.setAdapter(adapter);
     }
 
-    private void registrarGasto(EditText monto,EditText detalle, Spinner tipo, int id, String fecha){
+    private void registrarGasto(EditText monto, EditText detalle, Spinner tipo, int id, String fecha) {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
         String tipo_seleccionado = tipo.getSelectedItem().toString();
-        int idTipo =0;
-        String sql_obtener_id_gasto = "SELECT ID_TIPO_EGRESO FROM TIPO_EGRESO WHERE DETALLE_TIPO_EGRESO = '"+tipo_seleccionado+"'";
-        Cursor c = db.rawQuery(sql_obtener_id_gasto,null);
-        if (c.moveToFirst()){
+        int idTipo = 0;
+        String sql_obtener_id_gasto = "SELECT ID_TIPO_EGRESO FROM TIPO_EGRESO WHERE DETALLE_TIPO_EGRESO = '" + tipo_seleccionado + "'";
+        Cursor c = db.rawQuery(sql_obtener_id_gasto, null);
+        if (c.moveToFirst()) {
             idTipo = c.getInt(c.getColumnIndex("ID_TIPO_EGRESO"));
-            try{
+            try {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("MONTO_EGRESO", monto.getText().toString());
                 contentValues.put("FECHA_EGRESO", String.valueOf(fecha));
@@ -145,11 +156,11 @@ public class AgregarGastosActivity extends AppCompatActivity {
                 db.insert("EGRESOS", null, contentValues);
 
                 Toast.makeText(getApplicationContext(), R.string.gasto_registrado, Toast.LENGTH_SHORT).show();
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
-        }else{
-            Toast.makeText(getApplicationContext(),R.string.error_al_registrar_tipo,Toast.LENGTH_SHORT);
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.error_al_registrar_tipo, Toast.LENGTH_SHORT);
         }
         db.close();
     }

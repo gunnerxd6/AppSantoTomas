@@ -13,42 +13,16 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="176dp"
-            android:layout_marginLeft="177dp"
-            android:layout_marginRight="176dp"
-            android:layout_marginStart="177dp"
             android:layout_marginTop="32dp"
             android:text="Modificar Gastos"
+            android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="54dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="54dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_datepicker"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-
-        <TextView
-            android:id="@+id/tv_datepicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:text="Fecha actual"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/spinner" />
 
         <ListView
             android:id="@+id/lv_gastos"
@@ -59,12 +33,12 @@
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline8"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline8"
@@ -72,5 +46,34 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="557dp" />
+
+        <Button
+            android:id="@+id/bt_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Seleccionar fecha"
+            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="161dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="462dp" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
