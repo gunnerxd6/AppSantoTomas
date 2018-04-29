@@ -90,7 +90,7 @@ public class AgregarGastosActivity extends AppCompatActivity {
                     if (et_monto_gasto.getText().toString().equals("")) {
                         Toast.makeText(getApplicationContext(), "Debe ingresar un monto", Toast.LENGTH_SHORT);
 
-                    }else {
+                    } else {
                         registrarGasto(et_monto_gasto, et_detalle_gasto, s_tipogastos, id, fecha);
                     }
                 }

@@ -15,10 +15,11 @@ import java.util.Date;
 
 public class IngresosActivity extends AppCompatActivity {
     String fecha;
-    EditText et_ingresos,et_detalle;
+    EditText et_ingresos, et_detalle;
     Button bt_registrar_ingreso;
     int id;
-    SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +32,12 @@ public class IngresosActivity extends AppCompatActivity {
         bt_registrar_ingreso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrarIngreso(et_ingresos,et_detalle,fecha,id);
+                registrarIngreso(et_ingresos, et_detalle, fecha, id);
             }
         });
     }
 
-    private void registrarIngreso(EditText et_ingresos, EditText et_detalle, String fecha,int id_usuario){
+    private void registrarIngreso(EditText et_ingresos, EditText et_detalle, String fecha, int id_usuario) {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
@@ -46,8 +47,8 @@ public class IngresosActivity extends AppCompatActivity {
             contentValues.put("FECHA_INGRESO", String.valueOf(fecha));
             contentValues.put("FK_ID_USUARIO", id_usuario);
             db.insert("INGRESOS", null, contentValues);
-        }catch (Exception e){
-            Log.e("ERROR INGRESO",e.getMessage().toString());
+        } catch (Exception e) {
+            Log.e("ERROR INGRESO", e.getMessage().toString());
         }
 
         db.close();

@@ -14,7 +14,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="24dp"
         android:layout_marginStart="16dp"
-        android:text="@string/detalles"
+        android:text="Detalles"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/et_dialog_detalle"
         app:layout_constraintEnd_toStartOf="@+id/et_dialog_detalle"

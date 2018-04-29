@@ -18,6 +18,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -195,19 +196,29 @@ public class CircularActivity extends AppCompatActivity {
         dataSet.setSliceSpace(0);
 
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setSliceSpace(2f);
+        dataSet.setSelectionShift(5f);
         dataSet.setValueTextSize(13f);
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
+        dataSet.setValueLinePart1Length(0.5f);
+        dataSet.setValueLinePart2Length(0.2f);
+        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         PieData data = new PieData(tipos, dataSet);
+        data.setValueFormatter(new PercentFormatter());
         pieChart.setData(data);
         pieChart.setDescription("Porcentaje tipo de gastos");
         pieChart.setUsePercentValues(true);
         pieChart.setDrawHoleEnabled(false);
         pieChart.setDescriptionTextSize(20);
         pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleRadius(40);
+        pieChart.setHoleRadius(20);
         pieChart.setCenterText(centro);
         pieChart.animateY(1000);
         pieChart.setHoleColor(Color.TRANSPARENT);
+        pieChart.setTransparentCircleRadius(10f);
+
         pieChart.invalidate();
     }
+
 
 }

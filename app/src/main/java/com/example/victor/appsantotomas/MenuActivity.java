@@ -24,8 +24,8 @@ import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
     //declaracion de variables del tipo FloatingActionButton y ImageView
-    FloatingActionButton fab_agregargastos,fab_ingresos,fab_modificargastos,fab_estadisticas;
-    ImageView iv_salir,iv_configuracion;
+    FloatingActionButton fab_agregargastos, fab_ingresos, fab_modificargastos, fab_estadisticas;
+    ImageView iv_salir, iv_configuracion;
     int id;
 
     @Override
@@ -35,53 +35,53 @@ public class MenuActivity extends AppCompatActivity {
         //Obtener id de usuario logeado
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         //Floatingactionbutton
-        fab_ingresos=findViewById(R.id.fab_ingresos);
-        fab_agregargastos=findViewById(R.id.fab_agregargastos);
-        fab_modificargastos=findViewById(R.id.fab_modificargastos);
-        fab_estadisticas=findViewById(R.id.fab_estadisticas);
+        fab_ingresos = findViewById(R.id.fab_ingresos);
+        fab_agregargastos = findViewById(R.id.fab_agregargastos);
+        fab_modificargastos = findViewById(R.id.fab_modificargastos);
+        fab_estadisticas = findViewById(R.id.fab_estadisticas);
 
         //ImageView
-        iv_configuracion=findViewById(R.id.iv_configuracion);
-        iv_salir=findViewById(R.id.iv_salir);
+        iv_configuracion = findViewById(R.id.iv_configuracion);
+        iv_salir = findViewById(R.id.iv_salir);
 
 
         fab_ingresos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,IngresosActivity.class);
-                i.putExtra("ID_USUARIO_ACTUAL",id);
+                Intent i = new Intent(MenuActivity.this, IngresosActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
                 startActivity(i);
             }
         });
         fab_agregargastos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,AgregarGastosActivity.class);
-                i.putExtra("ID_USUARIO_ACTUAL",id);
+                Intent i = new Intent(MenuActivity.this, AgregarGastosActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
                 startActivity(i);
             }
         });
         fab_modificargastos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,ModificarGastosActivity.class);
-                i.putExtra("ID_USUARIO_ACTUAL",id);
+                Intent i = new Intent(MenuActivity.this, ModificarGastosActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
                 startActivity(i);
             }
         });
         fab_estadisticas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,EstadisticasActivity.class);
-                i.putExtra("ID_USUARIO_ACTUAL",id);
+                Intent i = new Intent(MenuActivity.this, EstadisticasActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
                 startActivity(i);
             }
         });
         iv_configuracion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this,ConfiguracionActivity.class);
-                i.putExtra("ID_USUARIO_ACTUAL",id);
+                Intent i = new Intent(MenuActivity.this, ConfiguracionActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
                 startActivity(i);
             }
         });
@@ -95,7 +95,7 @@ public class MenuActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent o = new Intent(MenuActivity.this,MainActivity.class);
+                        Intent o = new Intent(MenuActivity.this, MainActivity.class);
                         startActivity(o);
                         id = 0;
                         MenuActivity.this.finish();

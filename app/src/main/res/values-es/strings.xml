@@ -8,7 +8,7 @@
     <string name="hint_et_contrasena">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="modificar">Modificar</string>
-    <string name="detalles">Detalles</string>
+    <string name="detalles">Detalles (Opcional)</string>
     <string name="ingresos">Ingresos</string>
     <string name="determine_los_ingresos_para_un_periodo_semanal_o_mensual">Determine los ingresos para un periodo semanal o mensual</string>
     <string name="mensual">Mensual</string>

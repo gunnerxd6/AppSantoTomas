@@ -20,6 +20,7 @@ public class RegistroActivity extends AppCompatActivity {
     EditText et_registro_usuario, et_registro_email, et_registro_password, et_registro_cpassword;
     Button bt_registrar;
     ImageView iv_registro_email, iv_registro_ccontrasena;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
     }
+
     private void registrarUsuario(EditText usuario, EditText email, EditText contrasena, EditText ccontrasena) {
         boolean registrar = true;
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
@@ -61,9 +63,9 @@ public class RegistroActivity extends AppCompatActivity {
         boolean largoContraseña = true;
         boolean largoUsuario = true;
         boolean alfanumerico = true;
-        if (!vacios){
-                registrar = false;
-            }else{
+        if (!vacios) {
+            registrar = false;
+        } else {
             contra = compararPassword(contrasena, ccontrasena);
             correoV = true;
             largoContraseña = validarLargoContrasena(contrasena);

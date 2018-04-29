@@ -8,18 +8,29 @@ import android.widget.Button;
 
 public class EstadisticasActivity extends AppCompatActivity {
     int id;
-    Button bt_circular;
+    Button bt_circular, bt_barras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
+        bt_barras = findViewById(R.id.bt_barras);
         bt_circular = findViewById(R.id.bt_circular);
         bt_circular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EstadisticasActivity.this,CircularActivity.class);
-                i.putExtra("ID_USUARIO_ACTUAL",id);
+                Intent i = new Intent(EstadisticasActivity.this, CircularActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
+                startActivity(i);
+            }
+        });
+
+        bt_barras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EstadisticasActivity.this, BarrasActivity.class);
+                i.putExtra("ID_USUARIO_ACTUAL", id);
                 startActivity(i);
             }
         });
