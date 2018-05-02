@@ -43,7 +43,6 @@ public class AgregarGastosActivity extends AppCompatActivity {
         s_tipogastos = findViewById(R.id.s_tipogastos);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         consultarListaDeTiposDeGasto(id);
-        Toast.makeText(getApplicationContext(), "Id: " + id, Toast.LENGTH_SHORT).show();
         iv_agregargastos_anadir_tipo = findViewById(R.id.iv_agregargastos_añadir_tipo);
         iv_agregargastos_anadir_tipo.setOnClickListener(new View.OnClickListener() {
             @Override

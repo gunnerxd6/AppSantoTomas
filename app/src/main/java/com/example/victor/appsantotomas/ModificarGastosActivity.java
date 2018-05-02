@@ -45,6 +45,9 @@ public class ModificarGastosActivity extends AppCompatActivity {
         bt_datepicker = findViewById(R.id.bt_datepicker);
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         consultarGastos(id, lv_gastos);
+        if (gastos.size()==0){
+            Toast.makeText(getApplicationContext(),"No hay datos registrados",Toast.LENGTH_SHORT).show();
+        }
         lv_gastos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -147,6 +150,9 @@ public class ModificarGastosActivity extends AppCompatActivity {
                 String fecha = año + "-" + mes_fix + "-" + dia;
                 Log.d("Fecha", fecha);
                 consultarGastosPorFecha(id, lv_gastos, fecha);
+                if (gastos.size()==0){
+                    Toast.makeText(getApplicationContext(),"No hay datos registrados",Toast.LENGTH_SHORT).show();
+                }
             }
         };
 
