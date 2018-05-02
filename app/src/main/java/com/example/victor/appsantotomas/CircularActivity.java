@@ -48,8 +48,9 @@ public class CircularActivity extends AppCompatActivity {
         id = getIntent().getExtras().getInt("ID_USUARIO_ACTUAL");
         bt_circular_global = findViewById(R.id.bt_circular_global);
         bt_seleccionar_mes = findViewById(R.id.bt_seleccionar_mes);
+        pieChart = findViewById(R.id.pie_chart);
         obtenerGastos();
-        cargarGraficoCircular("Global");
+        cargarGraficoCircular();
 
         bt_seleccionar_mes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +87,7 @@ public class CircularActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 obtenerGastos();
-                cargarGraficoCircular("global");
+                cargarGraficoCircular();
                 pieChart.invalidate();
 
             }
@@ -136,6 +137,7 @@ public class CircularActivity extends AppCompatActivity {
             porcentajes.add(porcentaje);
         }
         db.close();
+        pieChart.setCenterText("Global");
     }
 
     private void obtenerGastosPorMes(String mes, String año) {
@@ -175,6 +177,26 @@ public class CircularActivity extends AppCompatActivity {
             Log.i("Suma por tipo", tipos.get(i) + ": " + montos.get(i));
         }
 
+        ArrayList meses = new ArrayList();
+
+        meses.add("Enero");
+        meses.add("Febrero");
+        meses.add("Marzo");
+        meses.add("Abril");
+        meses.add("Mayo");
+        meses.add("Junio");
+        meses.add("Julio");
+        meses.add("Agosto");
+        meses.add("Septiembre");
+        meses.add("Octubre");
+        meses.add("Noviembre");
+        meses.add("Diciembre");
+
+        pieChart.setCenterText((CharSequence) meses.get(Integer.valueOf(mes)-1));
+        pieChart.invalidate();
+
+
+
         //calcular porcentajes de cada tipo
         if (suma == 0) {
             pieChart.clear();
@@ -184,15 +206,15 @@ public class CircularActivity extends AppCompatActivity {
                 int porcentaje = (montos.get(i) * 100) / suma;
                 porcentajes.add(porcentaje);
             }
-            cargarGraficoCircular(mes);
+            cargarGraficoCircular();
 
         }
 
     }
 
-    private void cargarGraficoCircular(String centro) {
+    private void cargarGraficoCircular() {
         yvalues = new ArrayList<>();
-        pieChart = findViewById(R.id.pie_chart);
+
         for (int i = 0; i < porcentajes.size(); i++) {
             yvalues.add(new PieEntry(porcentajes.get(i), tipos.get(i)));
         }
@@ -219,7 +241,7 @@ public class CircularActivity extends AppCompatActivity {
         pieChart.setDrawHoleEnabled(false);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleRadius(20);
-        pieChart.setCenterText(centro);
+        //pieChart.setCenterText(centro);
         pieChart.animateY(1000);
         pieChart.setHoleColor(Color.TRANSPARENT);
         pieChart.setTransparentCircleRadius(10f);
