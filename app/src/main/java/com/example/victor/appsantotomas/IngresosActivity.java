@@ -41,7 +41,7 @@ public class IngresosActivity extends AppCompatActivity {
     private void registrarIngreso(EditText et_ingresos, EditText et_detalle, String fecha, int id_usuario) {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
-        if (et_ingresos.getText().toString().equals("")){
+        if (et_ingresos.getText().toString().equals("") || Integer.valueOf(et_ingresos.getText().toString())==0){
             Toast.makeText(getApplicationContext(),"Debe ingresar un monto",Toast.LENGTH_SHORT).show();
         }else {
 

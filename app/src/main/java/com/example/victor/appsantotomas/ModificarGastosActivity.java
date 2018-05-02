@@ -70,6 +70,11 @@ public class ModificarGastosActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.seleccionar_tipo), Toast.LENGTH_SHORT).show();
                             ingresar = false;
                         }
+                        if (et_dialog_monto.getText().toString().equals("") || Integer.valueOf(et_dialog_monto.getText().toString())==0){
+                            Toast.makeText(getApplicationContext(), "Debe ingresar un moonto", Toast.LENGTH_SHORT).show();
+                            ingresar = false;
+                        }
+
                         if (et_dialog_detalle.getText().toString().equals("") || et_dialog_monto.getText().toString().equals("")) {
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.completar_campos), Toast.LENGTH_SHORT).show();
                             ingresar = false;

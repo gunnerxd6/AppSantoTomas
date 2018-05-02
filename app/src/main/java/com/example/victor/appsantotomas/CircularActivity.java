@@ -223,6 +223,7 @@ public class CircularActivity extends AppCompatActivity {
         pieChart.animateY(1000);
         pieChart.setHoleColor(Color.TRANSPARENT);
         pieChart.setTransparentCircleRadius(10f);
+        pieChart.getDescription().setTextSize(20);
 
 
 

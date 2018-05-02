@@ -220,6 +220,7 @@ public class BarrasActivity extends AppCompatActivity {
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(true);
         chart.setVisibleXRange(6f, 2f);
+        chart.setNoDataText("No hay datos para el año seleccionado");
         chart.invalidate();
     }
 
