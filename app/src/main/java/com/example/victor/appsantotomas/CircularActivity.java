@@ -78,6 +78,9 @@ public class CircularActivity extends AppCompatActivity {
                     mes_fix = "0" + mes;
                     mes = Integer.valueOf(mes_fix);
                 }
+                if(mes>10){
+                    mes_fix = String.valueOf(mes);
+                }
                 String fecha = año + "-" + mes_fix + "-" + dia;
                 Log.d("Fecha", fecha);
                 obtenerGastosPorMes(mes_fix, String.valueOf(año));
@@ -191,6 +194,8 @@ public class CircularActivity extends AppCompatActivity {
         meses.add("Octubre");
         meses.add("Noviembre");
         meses.add("Diciembre");
+
+        Log.e("Mes","Mes seleccionado: "+mes);
 
         pieChart.setCenterText((CharSequence) meses.get(Integer.valueOf(mes)-1));
         pieChart.invalidate();

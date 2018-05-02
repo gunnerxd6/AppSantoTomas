@@ -79,6 +79,9 @@ public class BarrasActivity extends AppCompatActivity {
                     mes_fix = "0" + mes;
                     mes = Integer.valueOf(mes_fix);
                 }
+                if(mes>10){
+                    mes_fix = String.valueOf(mes);
+                }
                 String fecha = año + "-" + mes_fix + "-" + dia;
                 Log.d("Fecha", fecha);
                 obtenerGastosDefineAño(String.valueOf(año));
