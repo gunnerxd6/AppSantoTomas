@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,15 +41,21 @@ public class IngresosActivity extends AppCompatActivity {
     private void registrarIngreso(EditText et_ingresos, EditText et_detalle, String fecha, int id_usuario) {
         BaseHelper helper = new BaseHelper(this, "db_gastos", null, 1);
         SQLiteDatabase db = helper.getWritableDatabase();
-        try {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("DETALLE_INGRESO", et_detalle.getText().toString());
-            contentValues.put("MONTO_INGRESO", et_ingresos.getText().toString());
-            contentValues.put("FECHA_INGRESO", String.valueOf(fecha));
-            contentValues.put("FK_ID_USUARIO", id_usuario);
-            db.insert("INGRESOS", null, contentValues);
-        } catch (Exception e) {
-            Log.e("ERROR INGRESO", e.getMessage().toString());
+        if (et_ingresos.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"Debe ingresar un monto",Toast.LENGTH_SHORT).show();
+        }else {
+
+            try {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("DETALLE_INGRESO", et_detalle.getText().toString());
+                contentValues.put("MONTO_INGRESO", et_ingresos.getText().toString());
+                contentValues.put("FECHA_INGRESO", String.valueOf(fecha));
+                contentValues.put("FK_ID_USUARIO", id_usuario);
+                db.insert("INGRESOS", null, contentValues);
+                Toast.makeText(getApplicationContext(), "Ingreso registrado", Toast.LENGTH_SHORT);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Error al registrar ingreso", Toast.LENGTH_SHORT);
+            }
         }
 
         db.close();

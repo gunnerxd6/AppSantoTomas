@@ -15,14 +15,18 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class CircularActivity extends AppCompatActivity {
@@ -33,7 +37,7 @@ public class CircularActivity extends AppCompatActivity {
     ArrayList<Integer> IDS;
     PieChart pieChart;
     Button bt_circular_global;
-    ArrayList<Entry> yvalues;
+    ArrayList<PieEntry> yvalues;
     DatePickerDialog.OnDateSetListener onDateSetListener;
     Button bt_seleccionar_mes;
 
@@ -190,7 +194,7 @@ public class CircularActivity extends AppCompatActivity {
         yvalues = new ArrayList<>();
         pieChart = findViewById(R.id.pie_chart);
         for (int i = 0; i < porcentajes.size(); i++) {
-            yvalues.add(new Entry(porcentajes.get(i), i));
+            yvalues.add(new PieEntry(porcentajes.get(i), tipos.get(i)));
         }
         PieDataSet dataSet = new PieDataSet(yvalues, "Tipos de gastos en procentajes");
         dataSet.setSliceSpace(0);
@@ -203,13 +207,16 @@ public class CircularActivity extends AppCompatActivity {
         dataSet.setValueLinePart1Length(0.5f);
         dataSet.setValueLinePart2Length(0.2f);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        PieData data = new PieData(tipos, dataSet);
+
+        PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         pieChart.setData(data);
-        pieChart.setDescription("Porcentaje tipo de gastos");
+        Description description = new Description();
+        description.setTextColor(ColorTemplate.VORDIPLOM_COLORS[2]);
+        description.setText("Porcentaje tipo de gastos");
+        pieChart.setDescription(description);
         pieChart.setUsePercentValues(true);
         pieChart.setDrawHoleEnabled(false);
-        pieChart.setDescriptionTextSize(20);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleRadius(20);
         pieChart.setCenterText(centro);
@@ -217,8 +224,10 @@ public class CircularActivity extends AppCompatActivity {
         pieChart.setHoleColor(Color.TRANSPARENT);
         pieChart.setTransparentCircleRadius(10f);
 
-        pieChart.invalidate();
+
+
     }
+
 
 
 }

@@ -27,7 +27,7 @@
         <activity android:name=".EstadisticasActivity" />
         <activity android:name=".IngresosActivity" />
         <activity android:name=".CircularActivity" />
-        <activity android:name=".BarrasActivity"></activity>
+        <activity android:name=".BarrasActivity" />
     </application>
 
 </manifest>

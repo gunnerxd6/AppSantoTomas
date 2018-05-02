@@ -3,9 +3,9 @@ package com.example.victor.appsantotomas;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +63,7 @@ public class RegistroActivity extends AppCompatActivity {
         boolean largoContraseña = true;
         boolean largoUsuario = true;
         boolean alfanumerico = true;
+        boolean contraseñaAlfanumerica = true;
         if (!vacios) {
             registrar = false;
         } else {
@@ -71,7 +72,11 @@ public class RegistroActivity extends AppCompatActivity {
             largoContraseña = validarLargoContrasena(contrasena);
             alfanumerico = validarAlfanumerico(usuario);
             largoUsuario = validarLargoUsuario(usuario);
+            contraseñaAlfanumerica = validarContraseñaAlfanumerico(ccontrasena);
         }
+        if (!contraseñaAlfanumerica)
+            registrar = false;
+
         if (!alfanumerico)
             registrar = false;
 
@@ -195,7 +200,7 @@ public class RegistroActivity extends AppCompatActivity {
         }
         if (!valido) {
 
-            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
         }
         return valido;
     }
@@ -204,7 +209,17 @@ public class RegistroActivity extends AppCompatActivity {
         boolean valido = true;
         if (!usuario.getText().toString().matches("[A-Za-z0-9]+")) {
             valido = false;
-            Toast.makeText(getApplicationContext(), "El nombre de usuario debe ser alfanumerico", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "El nombre de usuario debe ser alfanumerico", Toast.LENGTH_SHORT).show();
+        }
+
+        return valido;
+    }
+
+    public boolean validarContraseñaAlfanumerico(EditText usuario) {
+        boolean valido = true;
+        if (!usuario.getText().toString().matches("[A-Za-z0-9]+")) {
+            valido = false;
+            Toast.makeText(getApplicationContext(), "La contraseña debe ser alfanumerica", Toast.LENGTH_SHORT).show();
         }
 
         return valido;
@@ -223,7 +238,7 @@ public class RegistroActivity extends AppCompatActivity {
         }
         if (!valido) {
 
-            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
         }
         return valido;
     }
